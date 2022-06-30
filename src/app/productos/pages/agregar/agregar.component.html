@@ -31,3 +31,13 @@
 <h3 class="mt-5">Formulario</h3>
 <pre> Valid: {{ miFormulario.valid }}</pre>
 <pre>Value: {{ miFormulario.controls["nombre"]?.errors | json }}</pre>
+
+
+<div class="row"
+    *customIf="tieneError('nombre')">
+  <div class="col">
+    <div class="alert alert-primary">
+          todo OK
+    </div>
+  </div>
+</div>
