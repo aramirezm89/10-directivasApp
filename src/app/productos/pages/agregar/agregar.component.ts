@@ -13,25 +13,34 @@ export class AgregarComponent implements OnInit {
   });
 
   text1: string = 'Antonio';
-  color: string = 'red'
+
+  color: string = 'red';
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
   tieneError(campo: string): boolean {
-
     return this.miFormulario.get(campo)?.invalid || false;
   }
 
-  cambiarText(){
+  cambiarText() {
     this.text1 = Math.random().toString();
   }
 
-  cambiarColor(){
+  cambiarColor() {
     const color = '#xxxxxx'.replace(/x/g, (y) =>
       ((Math.random() * 16) | 0).toString(16)
     );
 
-    this.color = color
+    this.color = color;
+  }
+
+  setErrorMsg(campo : string):string{
+    if(this.miFormulario.get(campo)?.errors?.['required'] && this.miFormulario.touched){
+      return 'Campo requerido funcion';
+    }else if(this.miFormulario.get(campo)?.errors?.['minlength'] &&  this.miFormulario.touched){
+      return  'Debe contener por lo menos 3 caracteres'
+    }
+    return ''
   }
 }
